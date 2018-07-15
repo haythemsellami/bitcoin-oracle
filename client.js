@@ -1,12 +1,10 @@
 var BitcoinOracleContract = require('./build/contracts/BitcoinOracle.json')
-var contract = require('truffle-contract')
-var ganache = require("ganache-cli");
+var TruffleContract = require('truffle-contract')
 var Web3 = require('web3');
-var web3 = new Web3(ganache.provider());
+var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 
-// Truffle abstraction to interact with our
-// deployed contract
-var bitcoinOracle = contract(BitcoinOracleContract);
+// Truffle abstraction to interact with our deployed contract
+var bitcoinOracle = TruffleContract(BitcoinOracleContract);
 bitcoinOracle.setProvider(web3.currentProvider);
 
 if (typeof bitcoinOracle.currentProvider.sendAsync !== "function") {
@@ -17,13 +15,14 @@ if (typeof bitcoinOracle.currentProvider.sendAsync !== "function") {
     };
 }
   
-web3.eth.getAccounts((accounts) => {
+web3.eth.getAccounts().then((accounts) => {
     bitcoinOracle.deployed().then((oracleInstance) => {
         let oracle = oracleInstance;
 
         let oraclePromises = [
-            oracleInstance.updateBTCCap({from: accounts[0]})  // Request oracle to update the information
-        ]
+            oracle.getBTCCap(),
+            oracle.updateBTCCap({from: accounts[0]})  // Request oracle to update the information
+        ];
     
         Promise.all(oraclePromises).then((result) => {
             console.log('BTC Market Cap: ' + result[0]);
@@ -34,4 +33,6 @@ web3.eth.getAccounts((accounts) => {
     }).catch((err) => {
         console.log(err);
     });
+}, (err) => {
+    console.log(err);
 });

@@ -1,0 +1,31 @@
+{
+  "name": "bitcoin-oracle",
+  "version": "1.0.0",
+  "description": "Ethereum oracle that retrieve bitcoin information",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "fetch": "^1.1.0",
+    "openzeppelin-solidity": "1.11.0",
+    "truffle-contract": "^3.0.6",
+    "web3": "^1.0.0-beta.34"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haythem96/bitcoin-oracle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haythem96/bitcoin-oracle/issues"
+  },
+  "homepage": "https://github.com/haythem96/bitcoin-oracle#readme"
+}

@@ -1,5 +1,5 @@
 var fetch = require('fetch')
-var BitcoinOracleContract = require('./build/contracts/BitcoinOracle.json')
+var BitcoinOracleContract = require('../../build/contracts/BitcoinOracle.json')
 var TruffleContract = require('truffle-contract')
 var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
